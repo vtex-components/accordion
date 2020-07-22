@@ -11,27 +11,38 @@ import Collapse, { CollapseProps } from './Collapse'
 
 interface Props {
   renderIcon?: (isActive: boolean) => ReactNode
+  multiOpen?: boolean
 }
 
-const Accordion = ({ children, renderIcon }: PropsWithChildren<Props>) => {
-  const [activeKey, setActiveKey] = useState<number>()
+const Accordion = ({
+  children,
+  renderIcon,
+  multiOpen = false,
+}: PropsWithChildren<Props>) => {
+  const [activeKeys, setActiveKeys] = useState<string[]>([])
 
-  const onClickItem = (key?: number) => {
-    if (key !== activeKey) {
-      setActiveKey(key)
+  const onClickItem = (key: string) => {
+    const index = activeKeys.indexOf(key)
+    const isActive = index > -1
+
+    if (isActive) {
+      setActiveKeys((currentKeys) =>
+        currentKeys.filter((current) => current !== key)
+      )
     } else {
-      setActiveKey(undefined)
+      setActiveKeys((currentKeys) =>
+        multiOpen ? [...currentKeys, key] : [key]
+      )
     }
   }
 
   const createSection = (child: ReactElement, index: number) => {
-    if (!child) return null
-
-    const isActive = activeKey === index
+    const id = index.toString()
+    const isActive = activeKeys.indexOf(id) > -1
 
     const props: CollapseProps = {
       ...child.props,
-      id: index,
+      id,
       isActive,
       onClick: onClickItem,
       renderIcon: child.props.renderIcon ?? renderIcon,
