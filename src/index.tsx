@@ -4,6 +4,7 @@ import React, {
   useState,
   ReactElement,
   ReactNode,
+  useEffect,
 } from 'react'
 import { Box } from 'theme-ui'
 
@@ -20,6 +21,10 @@ const Accordion = ({
   multiOpen = false,
 }: PropsWithChildren<Props>) => {
   const [activeKeys, setActiveKeys] = useState<string[]>([])
+
+  useEffect(() => {
+    setActiveKeys([])
+  }, [multiOpen])
 
   const onClickItem = (key: string) => {
     const index = activeKeys.indexOf(key)
