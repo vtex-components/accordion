@@ -1,8 +1,8 @@
 {
   "name": "@vtex-components/accordion",
-  "version": "1.0.0",
-  "description": "Made with create-react-library",
-  "author": "vitoriaheliane",
+  "version": "0.0.0",
+  "description": "Accordion component for react",
+    "author": "vitoriaheliane",
   "license": "MIT",
   "repository": "vtex-components/accordion",
   "main": "dist/index.js",
