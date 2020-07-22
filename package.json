@@ -2,7 +2,7 @@
   "name": "@vtex-components/accordion",
   "version": "0.0.0",
   "description": "Accordion component for react",
-    "author": "vitoriaheliane",
+  "author": "vitoriaheliane",
   "license": "MIT",
   "repository": "vtex-components/accordion",
   "main": "dist/index.js",
@@ -36,6 +36,7 @@
     "@storybook/react": "^5.3.19",
     "@types/react": "^16.9.27",
     "@types/react-dom": "^16.9.7",
+    "@types/theme-ui": "^0.3.5",
     "@vtex/prettier-config": "^0.3.1",
     "@vtex/tsconfig": "^0.5.0",
     "eslint-config-vtex-react": "^6.7.0",
@@ -46,5 +47,8 @@
     "ts-loader": "^8.0.1",
     "tsdx": "^0.13.2",
     "typescript": "^3.9.6"
+  },
+  "dependencies": {
+    "theme-ui": "^0.3.1"
   }
 }
