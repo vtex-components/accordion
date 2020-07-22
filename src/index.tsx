@@ -12,19 +12,22 @@ import Collapse, { CollapseProps } from './Collapse'
 
 interface Props {
   renderIcon?: (isActive: boolean) => ReactNode
-  multiOpen?: boolean
+  mode?: 'multiOpen' | 'singleOpen'
+  prefix?: string
 }
 
 const Accordion = ({
   children,
   renderIcon,
-  multiOpen = false,
+  mode = 'singleOpen',
+  prefix = 'vtex-components',
 }: PropsWithChildren<Props>) => {
   const [activeKeys, setActiveKeys] = useState<string[]>([])
+  const prefixClassName = `${prefix}-accordion`
 
   useEffect(() => {
     setActiveKeys([])
-  }, [multiOpen])
+  }, [mode])
 
   const onClickItem = (key: string) => {
     const index = activeKeys.indexOf(key)
@@ -36,7 +39,7 @@ const Accordion = ({
       )
     } else {
       setActiveKeys((currentKeys) =>
-        multiOpen ? [...currentKeys, key] : [key]
+        mode === 'multiOpen' ? [...currentKeys, key] : [key]
       )
     }
   }
@@ -58,7 +61,7 @@ const Accordion = ({
 
   const items = Children.map(children as ReactElement, createSection)
 
-  return <Box>{items}</Box>
+  return <Box variant={prefixClassName}>{items}</Box>
 }
 
 Accordion.Section = Collapse

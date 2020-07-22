@@ -1,8 +1,9 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState } from 'react'
 import { Text, Box, Button } from 'theme-ui'
 
 import Accordion from '../src/index'
 import { CaretUp, CaretDown } from './Icons'
+import ThemeProvider from './ThemeProvider'
 
 export default {
   title: 'Accordion',
@@ -16,12 +17,17 @@ const renderIcon = (isActive: boolean) => (
 )
 
 export const SingleOpen = () => {
-  const [multiOpen, setMultiOpen] = useState(false)
+  const [mode, setMode] = useState<'singleOpen' | 'multiOpen'>('multiOpen')
+
+  const toggleMode = () => {
+    setMode(mode === 'singleOpen' ? 'multiOpen' : 'singleOpen')
+  }
 
   return (
-    <Fragment>
-      <Button onClick={() => setMultiOpen(!multiOpen)}>Toggle mode</Button>
-      <Accordion renderIcon={renderIcon} multiOpen={multiOpen}>
+    <ThemeProvider>
+      <Text>Current mode: {mode}</Text>
+      <Button onClick={toggleMode}>Toggle mode</Button>
+      <Accordion renderIcon={renderIcon} mode={mode}>
         <Accordion.Section header="What is Lorem Ipsum?">
           <Text>
             Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -50,6 +56,6 @@ export const SingleOpen = () => {
           </Text>
         </Accordion.Section>
       </Accordion>
-    </Fragment>
+    </ThemeProvider>
   )
 }
