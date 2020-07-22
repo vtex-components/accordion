@@ -7,7 +7,6 @@ interface Props {
   id?: string
   onClick?: Function
   isActive?: boolean
-  headerClasses?: Record<string, object>
   renderIcon?: (isActive: boolean) => ReactNode
 }
 
@@ -22,12 +21,11 @@ const Collapse = ({
   renderIcon,
   prefix = 'vtex-components',
 }: CollapseProps) => {
-  const prefixClassName = `${prefix}-collapse${id ?? `-${id}`}`
-
   const handleOnClick = () => {
     onClick?.(id)
   }
 
+  const prefixClassName = `${prefix}-collapsible`
   const icon = renderIcon?.(isActive)
 
   return (
