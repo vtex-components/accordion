@@ -15,13 +15,15 @@ yarn add @vtex-components/accordion
 ```tsx
 import React, { Component } from 'react'
 
-import MyComponent from '@vtex-components/accordion'
+import Accordion from '@vtex-components/accordion'
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
-}
+const Example = () => (
+  <Accordion>
+    <Accordion.Section header="Title">
+      This is the content
+    </Accordion.Section>
+  </Accordion>
+)
 ```
 
 ## License
