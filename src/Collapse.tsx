@@ -5,7 +5,7 @@ interface Props {
   header: ReactNode
   prefix?: string
   id?: string
-  onClick?: (id?: string) => void
+  onClick?: Function
   isActive?: boolean
   headerClasses?: Record<string, object>
   renderIcon?: (isActive: boolean) => ReactNode
