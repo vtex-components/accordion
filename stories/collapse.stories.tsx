@@ -12,7 +12,6 @@ export const Default = () => {
 
   return (
     <Collapse
-      id="2"
       isActive={isopen}
       onClick={() => setOpen(!isopen)}
       header="This is the collapse"

@@ -13,10 +13,10 @@ const Header = <Text>Wazaaa</Text>
 export const Emoji = () => {
   return (
     <Accordion>
-      <Accordion.Section id="waza" header={Header}>
+      <Accordion.Section header={Header}>
         <span>sdfsdfsdf</span>
       </Accordion.Section>
-      <Accordion.Section id="bla" header="this is the header">
+      <Accordion.Section header="this is the header">
         <span>sdfsdfsdf</span>
       </Accordion.Section>
     </Accordion>

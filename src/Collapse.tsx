@@ -2,9 +2,10 @@ import React, { ReactNode, PropsWithChildren } from 'react'
 import { Box, Flex } from 'theme-ui'
 
 interface Props {
-  id: string
   header: ReactNode
-  onClick?: (id: string) => void
+  prefix?: string
+  id?: string
+  onClick?: (id?: string) => void
   isActive?: boolean
   headerClasses?: Record<string, object>
   renderIcon?: (isActive: boolean) => ReactNode
@@ -18,18 +19,20 @@ const Collapse = ({
   children,
   isActive = false,
   onClick,
-  renderIcon = (_: boolean) => null,
-  headerClasses = {},
+  renderIcon,
+  prefix = 'vtex-components',
 }: CollapseProps) => {
+  const prefixClassName = `${prefix}-collapse${id ?? `-${id}`}`
+
   const handleOnClick = () => {
     onClick?.(id)
   }
 
-  const icon = renderIcon(isActive)
+  const icon = renderIcon?.(isActive)
 
   return (
-    <Box>
-      <Flex sx={headerClasses} onClick={handleOnClick}>
+    <Box variant={prefixClassName}>
+      <Flex variant={`${prefixClassName}-header`} onClick={handleOnClick}>
         {header}
         {icon}
       </Flex>
