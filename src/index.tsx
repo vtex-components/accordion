@@ -8,7 +8,7 @@ import React, {
 } from 'react'
 import { Box } from 'theme-ui'
 
-import Collapse, { CollapseProps } from './Collapse'
+import Collapsible, { CollapsibleProps } from './Collapsible'
 
 interface Props {
   renderIcon?: (isActive: boolean) => ReactNode
@@ -48,7 +48,7 @@ const Accordion = ({
     const id = index.toString()
     const isActive = activeKeys.indexOf(id) > -1
 
-    const props: CollapseProps = {
+    const props: CollapsibleProps = {
       ...child.props,
       id,
       isActive,
@@ -64,6 +64,6 @@ const Accordion = ({
   return <Box variant={prefixClassName}>{items}</Box>
 }
 
-Accordion.Section = Collapse
+Accordion.Section = Collapsible
 
 export default Accordion

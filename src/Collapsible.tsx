@@ -5,14 +5,14 @@ interface Props {
   header: ReactNode
   prefix?: string
   id?: string
-  onClick?: Function
+  onClick?: (id: string) => void
   isActive?: boolean
   renderIcon?: (isActive: boolean) => ReactNode
 }
 
-export type CollapseProps = PropsWithChildren<Props>
+export type CollapsibleProps = PropsWithChildren<Props>
 
-const Collapse = ({
+const Collapsible = ({
   id,
   header,
   children,
@@ -20,9 +20,9 @@ const Collapse = ({
   onClick,
   renderIcon,
   prefix = 'vtex-components',
-}: CollapseProps) => {
+}: CollapsibleProps) => {
   const handleOnClick = () => {
-    onClick?.(id)
+    onClick?.(id ?? '')
   }
 
   const prefixClassName = `${prefix}-collapsible`
@@ -39,4 +39,4 @@ const Collapse = ({
   )
 }
 
-export default Collapse
+export default Collapsible
