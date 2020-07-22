@@ -4,8 +4,8 @@ import React, {
   useState,
   ReactElement,
   ReactNode,
-  Fragment,
 } from 'react'
+import { Box } from 'theme-ui'
 
 import Collapse, { CollapseProps } from './Collapse'
 
@@ -14,9 +14,9 @@ interface Props {
 }
 
 const Accordion = ({ children, renderIcon }: PropsWithChildren<Props>) => {
-  const [activeKey, setActiveKey] = useState<string>()
+  const [activeKey, setActiveKey] = useState<number>()
 
-  const onClickItem = (key: string) => {
+  const onClickItem = (key?: number) => {
     if (key !== activeKey) {
       setActiveKey(key)
     } else {
@@ -27,27 +27,14 @@ const Accordion = ({ children, renderIcon }: PropsWithChildren<Props>) => {
   const createSection = (child: ReactElement, index: number) => {
     if (!child) return null
 
-    const key = (index as unknown) as string
-    const {
-      header,
-      headerClasses,
-      children: accordionChildren,
-    } = child.props as CollapseProps
-
-    const isActive = activeKey === key
+    const isActive = activeKey === index
 
     const props: CollapseProps = {
-      id: key,
-      header,
-      headerClasses,
+      ...child.props,
+      id: index,
       isActive,
-      children: accordionChildren,
       onClick: onClickItem,
-      renderIcon,
-    }
-
-    if (typeof child.type === 'string') {
-      return child
+      renderIcon: child.props.renderIcon ?? renderIcon,
     }
 
     return React.cloneElement(child, props)
@@ -55,7 +42,7 @@ const Accordion = ({ children, renderIcon }: PropsWithChildren<Props>) => {
 
   const items = Children.map(children as ReactElement, createSection)
 
-  return <Fragment>{items}</Fragment>
+  return <Box>{items}</Box>
 }
 
 Accordion.Section = Collapse
