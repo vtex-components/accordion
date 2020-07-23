@@ -1,10 +1,10 @@
 import React, {
-  PropsWithChildren,
   Children,
   useState,
   ReactElement,
   ReactNode,
   useEffect,
+  PropsWithChildren,
 } from 'react'
 import { Box } from 'theme-ui'
 
@@ -16,12 +16,12 @@ interface Props {
   prefix?: string
 }
 
-const Accordion = ({
+function Accordion({
   children,
   renderIcon,
   mode = 'singleOpen',
   prefix = 'vtex-components',
-}: PropsWithChildren<Props>) => {
+}: PropsWithChildren<Props>) {
   const [activeKeys, setActiveKeys] = useState<string[]>([])
   const prefixClassName = `${prefix}-accordion`
 
