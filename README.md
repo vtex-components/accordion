@@ -19,8 +19,11 @@ import Accordion from '@vtex-components/accordion'
 
 const Example = () => (
   <Accordion>
-    <Accordion.Section header="Title">
-      This is the content
+    <Accordion.Section header="Section one">
+      This is the content of section one
+    </Accordion.Section>
+    <Accordion.Section header="Section two">
+      This is the content of section two
     </Accordion.Section>
   </Accordion>
 )
