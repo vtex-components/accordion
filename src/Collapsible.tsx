@@ -12,7 +12,7 @@ interface Props {
 
 export type CollapsibleProps = PropsWithChildren<Props>
 
-const Collapsible = ({
+function Collapsible({
   id,
   header,
   children,
@@ -20,7 +20,7 @@ const Collapsible = ({
   onClick,
   renderIcon,
   prefix = 'vtex-components',
-}: CollapsibleProps) => {
+}: CollapsibleProps) {
   const handleOnClick = () => {
     onClick?.(id ?? '')
   }
