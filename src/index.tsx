@@ -26,7 +26,7 @@ function Accordion({
   const [activeKeys, setActiveKeys] = useState<Record<string, boolean>>({})
   const customVariant = `${variant}.accordion`
 
-  const toggleItem = useCallback(
+  const toggleSection = useCallback(
     (key: number, isActive: boolean) => {
       setActiveKeys(
         mode === 'multiOpen'
@@ -46,16 +46,16 @@ function Accordion({
       children as ReactElement,
       (child: ReactElement, key: number) => {
         if (child.props.isActive) {
-          toggleItem(key, true)
+          toggleSection(key, true)
         }
       }
     )
-  }, [children, toggleItem])
+  }, [children, toggleSection])
 
-  const onClickItem = (key: number, callback?: Function) => {
+  const onClickSection = (key: number, callback?: Function) => {
     const isActive = activeKeys[key]
 
-    toggleItem(key, !isActive)
+    toggleSection(key, !isActive)
     callback?.(key)
   }
 
@@ -66,7 +66,7 @@ function Accordion({
       ...child.props,
       id: key,
       isActive,
-      onClick: () => onClickItem(key, child.props.onClick),
+      onClick: () => onClickSection(key, child.props.onClick),
       renderIcon: child.props.renderIcon ?? renderIcon,
       variant: child.props.variant ?? customVariant,
     }
@@ -74,9 +74,9 @@ function Accordion({
     return React.cloneElement(child, props)
   }
 
-  const items = Children.map(children as ReactElement, createSection)
+  const sections = Children.map(children as ReactElement, createSection)
 
-  return <Box variant={customVariant}>{items}</Box>
+  return <Box variant={customVariant}>{sections}</Box>
 }
 
 Accordion.Section = Collapsible
