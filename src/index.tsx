@@ -13,17 +13,17 @@ import Collapsible, { CollapsibleProps } from './Collapsible'
 interface Props {
   renderIcon?: (isActive: boolean) => ReactNode
   mode?: 'multiOpen' | 'singleOpen'
-  prefix?: string
+  variant?: string
 }
 
 function Accordion({
   children,
   renderIcon,
   mode = 'singleOpen',
-  prefix = 'vtex-components',
+  variant = 'vtex-components',
 }: PropsWithChildren<Props>) {
   const [activeKeys, setActiveKeys] = useState<string[]>([])
-  const prefixClassName = `${prefix}-accordion`
+  const customVariant = `${variant}.accordion`
 
   useEffect(() => {
     setActiveKeys([])
@@ -54,6 +54,7 @@ function Accordion({
       isActive,
       onClick: onClickItem,
       renderIcon: child.props.renderIcon ?? renderIcon,
+      variant: child.props.variant ?? customVariant,
     }
 
     return React.cloneElement(child, props)
@@ -61,7 +62,7 @@ function Accordion({
 
   const items = Children.map(children as ReactElement, createSection)
 
-  return <Box variant={prefixClassName}>{items}</Box>
+  return <Box variant={customVariant}>{items}</Box>
 }
 
 Accordion.Section = Collapsible

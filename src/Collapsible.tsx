@@ -3,7 +3,7 @@ import { Box, Flex } from 'theme-ui'
 
 interface Props {
   header: ReactNode
-  prefix?: string
+  variant?: string
   id?: string
   onClick?: (id: string) => void
   isActive?: boolean
@@ -19,18 +19,18 @@ function Collapsible({
   isActive = false,
   onClick,
   renderIcon,
-  prefix = 'vtex-components',
+  variant = 'vtex-components',
 }: CollapsibleProps) {
   const handleOnClick = () => {
     onClick?.(id ?? '')
   }
 
-  const prefixClassName = `${prefix}-collapsible`
+  const customVariant = `${variant}.collapsible`
   const icon = renderIcon?.(isActive)
 
   return (
-    <Box variant={prefixClassName}>
-      <Flex variant={`${prefixClassName}-header`} onClick={handleOnClick}>
+    <Box variant={variant}>
+      <Flex variant={`${customVariant}.header`} onClick={handleOnClick}>
         {header}
         {icon}
       </Flex>
