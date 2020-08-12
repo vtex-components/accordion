@@ -28,11 +28,7 @@ export const SingleOpen = () => {
       <Text>Current mode: {mode}</Text>
       <Button onClick={toggleMode}>Toggle mode</Button>
       <Accordion renderIcon={renderIcon} mode={mode}>
-        <Accordion.Section
-          header="What is Lorem Ipsum?"
-          isActive
-          onClick={(id: string) => console.log('clicou no', id)}
-        >
+        <Accordion.Section header="What is Lorem Ipsum?" isActive>
           <Text>
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industrys standard dummy text
@@ -45,7 +41,7 @@ export const SingleOpen = () => {
             PageMaker including versions of Lorem Ipsum.
           </Text>
         </Accordion.Section>
-        <Accordion.Section header="How to use it?">
+        <Accordion.Section header="How to use it?" isActive>
           <Text>
             t is a long established fact that a reader will be distracted by the
             readable content of a page when looking at its layout. The point of
