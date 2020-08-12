@@ -17,7 +17,7 @@ const renderIcon = (isActive: boolean) => (
 )
 
 export const SingleOpen = () => {
-  const [mode, setMode] = useState<'singleOpen' | 'multiOpen'>('multiOpen')
+  const [mode, setMode] = useState<'singleOpen' | 'multiOpen'>('singleOpen')
 
   const toggleMode = () => {
     setMode(mode === 'singleOpen' ? 'multiOpen' : 'singleOpen')
@@ -28,7 +28,11 @@ export const SingleOpen = () => {
       <Text>Current mode: {mode}</Text>
       <Button onClick={toggleMode}>Toggle mode</Button>
       <Accordion renderIcon={renderIcon} mode={mode}>
-        <Accordion.Section header="What is Lorem Ipsum?">
+        <Accordion.Section
+          header="What is Lorem Ipsum?"
+          isActive
+          onClick={(id: string) => console.log('clicou no', id)}
+        >
           <Text>
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industrys standard dummy text
