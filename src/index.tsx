@@ -27,7 +27,7 @@ function Accordion({
   const customVariant = `${variant}.accordion`
 
   const toggleItem = useCallback(
-    (key: string, isActive: boolean) => {
+    (key: number, isActive: boolean) => {
       setActiveKeys(
         mode === 'multiOpen'
           ? (currentKeys) => ({ ...currentKeys, [key]: isActive })
@@ -44,9 +44,7 @@ function Accordion({
   useEffect(() => {
     Children.map(
       children as ReactElement,
-      (child: ReactElement, index: number) => {
-        const key = index.toString()
-
+      (child: ReactElement, key: number) => {
         if (child.props.isActive) {
           toggleItem(key, true)
         }
@@ -54,22 +52,21 @@ function Accordion({
     )
   }, [children, toggleItem])
 
-  const onClickItem = (key: string, callback?: Function) => {
+  const onClickItem = (key: number, callback?: Function) => {
     const isActive = activeKeys[key]
 
     toggleItem(key, !isActive)
     callback?.(key)
   }
 
-  const createSection = (child: ReactElement, index: number) => {
-    const id = index.toString()
-    const isActive = activeKeys[id]
+  const createSection = (child: ReactElement, key: number) => {
+    const isActive = activeKeys[key]
 
     const props: CollapsibleProps = {
       ...child.props,
-      id,
+      id: key,
       isActive,
-      onClick: () => onClickItem(id, child.props.onClick),
+      onClick: () => onClickItem(key, child.props.onClick),
       renderIcon: child.props.renderIcon ?? renderIcon,
       variant: child.props.variant ?? customVariant,
     }
