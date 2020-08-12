@@ -25,12 +25,12 @@ function Collapsible({
     onClick?.(id ?? '')
   }
 
-  const prefixClassName = `${prefix}-collapsible`
+  const variant = `${prefix}.collapsible`
   const icon = renderIcon?.(isActive)
 
   return (
-    <Box variant={prefixClassName}>
-      <Flex variant={`${prefixClassName}-header`} onClick={handleOnClick}>
+    <Box variant={variant}>
+      <Flex variant={`${variant}.header`} onClick={handleOnClick}>
         {header}
         {icon}
       </Flex>

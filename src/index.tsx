@@ -23,7 +23,7 @@ function Accordion({
   prefix = 'vtex-components',
 }: PropsWithChildren<Props>) {
   const [activeKeys, setActiveKeys] = useState<string[]>([])
-  const prefixClassName = `${prefix}-accordion`
+  const variant = `${prefix}.accordion`
 
   useEffect(() => {
     setActiveKeys([])
@@ -61,7 +61,7 @@ function Accordion({
 
   const items = Children.map(children as ReactElement, createSection)
 
-  return <Box variant={prefixClassName}>{items}</Box>
+  return <Box variant={variant}>{items}</Box>
 }
 
 Accordion.Section = Collapsible
