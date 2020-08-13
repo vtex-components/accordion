@@ -6,6 +6,7 @@ import React, {
   useEffect,
   PropsWithChildren,
   useCallback,
+  // useCallback,
 } from 'react'
 import { Box } from 'theme-ui'
 
@@ -25,56 +26,54 @@ function Accordion({
 }: PropsWithChildren<Props>) {
   const [activeKeys, setActiveKeys] = useState<Record<string, boolean>>({})
   const customVariant = `${variant}.accordion`
-
-  const toggleSection = useCallback(
-    (key: number, isActive: boolean) => {
-      setActiveKeys(
-        mode === 'multiOpen'
-          ? (currentKeys) => ({ ...currentKeys, [key]: isActive })
-          : { [key]: isActive }
-      )
-    },
-    [mode]
-  )
+  const [sections, setSections] = useState<ReactElement[]>([])
 
   useEffect(() => {
     setActiveKeys({})
   }, [mode])
 
+  const onClickSection = useCallback(
+    (key: number, callback?: Function) => {
+      const isActive = activeKeys[key]
+
+      setActiveKeys(
+        mode === 'multiOpen'
+          ? (currentKeys) => ({ ...currentKeys, [key]: !isActive })
+          : { [key]: !isActive }
+      )
+
+      callback?.(key)
+    },
+    [activeKeys, mode]
+  )
+
   useEffect(() => {
-    Children.map(
-      children as ReactElement,
-      (child: ReactElement, key: number) => {
+    const keys: Record<string, boolean> = activeKeys
+    const createSection = (child: ReactElement, key: number) => {
+      if (mode === 'multiOpen' || Object.keys(keys).length === 0) {
         if (child.props.isActive) {
-          toggleSection(key, true)
+          keys[key] = true
         }
       }
-    )
-  }, [children, toggleSection])
 
-  const onClickSection = (key: number, callback?: Function) => {
-    const isActive = activeKeys[key]
+      const isActive = keys[key]
 
-    toggleSection(key, !isActive)
-    callback?.(key)
-  }
+      const props: CollapsibleProps = {
+        ...child.props,
+        id: key,
+        isActive,
+        onClick: () => onClickSection(key, child.props.onClick),
+        renderIcon: child.props.renderIcon ?? renderIcon,
+        variant: child.props.variant ?? customVariant,
+      }
 
-  const createSection = (child: ReactElement, key: number) => {
-    const isActive = activeKeys[key]
+      setActiveKeys(keys)
 
-    const props: CollapsibleProps = {
-      ...child.props,
-      id: key,
-      isActive,
-      onClick: () => onClickSection(key, child.props.onClick),
-      renderIcon: child.props.renderIcon ?? renderIcon,
-      variant: child.props.variant ?? customVariant,
+      return React.cloneElement(child, props)
     }
 
-    return React.cloneElement(child, props)
-  }
-
-  const sections = Children.map(children as ReactElement, createSection)
+    setSections(Children.map(children as ReactElement, createSection))
+  }, [activeKeys, children, customVariant, mode, onClickSection, renderIcon])
 
   return <Box variant={customVariant}>{sections}</Box>
 }
