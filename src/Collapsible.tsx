@@ -29,7 +29,7 @@ function Collapsible({
   const icon = renderIcon?.(isActive)
 
   return (
-    <Box variant={variant}>
+    <Box variant={customVariant}>
       <Flex variant={`${customVariant}.header`} onClick={handleOnClick}>
         {header}
         {icon}
