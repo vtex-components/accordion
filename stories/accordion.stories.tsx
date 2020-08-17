@@ -41,7 +41,7 @@ export const SingleOpen = () => {
             PageMaker including versions of Lorem Ipsum.
           </Text>
         </Accordion.Section>
-        <Accordion.Section header="How to use it?" isActive>
+        <Accordion.Section header="How to use it?">
           <Text>
             t is a long established fact that a reader will be distracted by the
             readable content of a page when looking at its layout. The point of
