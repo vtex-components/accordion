@@ -1,6 +1,6 @@
 {
   "name": "@vtex-components/accordion",
-  "version": "0.2.2",
+  "version": "0.2.3-beta",
   "description": "Accordion component for react",
   "author": "vitoriaheliane",
   "license": "MIT",
