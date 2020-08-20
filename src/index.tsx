@@ -47,6 +47,12 @@ function Accordion({
   )
 
   useEffect(() => {
+    const keys = Children.map(children, (child) => !!child.props.isActive)
+
+    setActiveKeys(keys)
+  }, [children])
+
+  useEffect(() => {
     if (mode === 'singleOpen') {
       Children.forEach(children, assertSingleOpen())
     }
