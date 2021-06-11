@@ -30,7 +30,7 @@ function Collapsible({
 
   return (
     <Box variant={customVariant}>
-      <Flex variant={`${customVariant}.header`} onClick={handleOnClick}>
+      <Flex data-testid="collapsibleHeader" variant={`${customVariant}.header`} onClick={handleOnClick}>
         {header}
         {icon}
       </Flex>
